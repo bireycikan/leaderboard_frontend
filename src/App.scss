@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import 'fonts/font.scss';
+@import 'colors/colors.scss';
+
+body {
+  background: url('https://i.kinja-img.com/gawker-media/image/upload/m6ztwkawvypgrnn9k5o3.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: $main-font;
+}
+
+
+@import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
+@import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+
+.ag-theme-alpine {
+  @include ag-theme-alpine((
+    odd-row-background-color: #BFC8DC
+  ));
+
+  height: 500px;
+  width: 1002px;
+}
+
+
+.leadheader {
+  width: 100%;
+  height: 70px;
+  background: $maincolor;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  & h2 {
+    margin: 0;
+    color: $white;
+    padding-top: 20px;
+  }
+}
+
+.board {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.player-grids {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.interaction-buttons {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 20px 0px;
+  
+  & button {
+    margin: 0 2px;
+    &:nth-last-child(1) {
+      margin-left: 2px;
+    }
+    &:nth-child(1) {
+      margin-right: 2px;
+    }
+    margin-bottom: 10px;
+  }
+}
+
+.paginate {
+  & ul {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  & li {
+    margin: 0 2px;
+    font-size: 20px;
+    &:nth-last-child(1) {
+      margin-left: 2px;
+    }
+    &:nth-child(1) {
+      margin-right: 2px;
+    }
+  }
+}
