@@ -9,6 +9,7 @@ import { io } from "socket.io-client";
 
 
 const BACKEND_SERVER_URI = process.env.REACT_APP_BACKEND_SERVER_URI;
+const axiosInstance = axios.create({ baseURL: BACKEND_SERVER_URI });
 
 // connect backend socket
 const socket = io()
@@ -47,7 +48,7 @@ const App = () => {
     let selected = data.selected;
     let offset = Math.ceil(selected * 100);
 
-    axios(`${BACKEND_SERVER_URI}/api/players?top=100&offset=${offset}`)
+    axiosInstance(`/players?top=100&offset=${offset}`)
       .then(response => {
         setPlayerData(response.data, offset)
       })
@@ -56,7 +57,7 @@ const App = () => {
   const onGridReady = (params) => {
     setGridApi(params.api);
 
-    axios(`${BACKEND_SERVER_URI}/api/players`)
+    axiosInstance(`/players`)
       .then(response => {
         setPlayerData(response.data, 0)
       })
@@ -139,7 +140,7 @@ const App = () => {
   }
 
   const getTopPlayer = function (topLimit, e) {
-    axios(`${BACKEND_SERVER_URI}/api/players?top=${topLimit}&offset=0`)
+    axiosInstance(`/players?top=${topLimit}&offset=0`)
       .then(response => {
         setPlayerData(response.data, 0);
       })
@@ -148,7 +149,7 @@ const App = () => {
   const resetLeaderboard = function (e) {
     setReset({ ...reset, stopped: false, disabled: true })
 
-    axios(`${BACKEND_SERVER_URI}/api/players/reset`)
+    axiosInstance(`/players/reset`)
       .then(response => {
         if (response.data.success) {
           resetLeaderboardData();
@@ -172,13 +173,13 @@ const App = () => {
     };
     socket.on('simulate', simulateHandler)
 
-    await axios(`${BACKEND_SERVER_URI}/api/players/simulate`)
+    await axiosInstance(`/players/simulate`)
 
   }
 
   const calculatePrizePool = function (ratio, e) {
     distributionStarted();
-    axios(`${BACKEND_SERVER_URI}/api/players/calculate-prize-pool?ratio=${ratio}`)
+    axiosInstance(`/players/calculate-prize-pool?ratio=${ratio}`)
       .then(response => {
         console.log('response: ', response.data);
         distributionStopped();
