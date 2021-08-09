@@ -11,7 +11,7 @@ import { io } from "socket.io-client";
 const BACKEND_SERVER_URI = process.env.REACT_APP_BACKEND_SERVER_URI;
 
 // connect backend socket
-const socket = io(BACKEND_SERVER_URI)
+const socket = io()
 
 
 const App = () => {
